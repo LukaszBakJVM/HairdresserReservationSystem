@@ -17,7 +17,7 @@ public class HairdresserController {
     }
 
     @PostMapping("/registration")
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK)
     RegistrationResponse createNewPerson(@RequestBody HairdresserRegistration registrationDto) {
         return services.createNewPerson(registrationDto);
     }

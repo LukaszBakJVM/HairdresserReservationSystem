@@ -24,6 +24,7 @@ public class HairdresserServices {
     }
 
     public Optional<HairdresserLogin> login(String name) {
-        return repository.findByName(name).map(mapper::login);
+        return repository.findByUsername(name).map(mapper::login);
     }
+
 }
