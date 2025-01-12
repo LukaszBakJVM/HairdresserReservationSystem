@@ -1,13 +1,11 @@
 package org.example.hairdresserreservationsystem;
 
-import org.example.hairdresserreservationsystem.dto.HairdresserInformation;
-import org.example.hairdresserreservationsystem.dto.HairdresserLogin;
-import org.example.hairdresserreservationsystem.dto.HairdresserRegistration;
-import org.example.hairdresserreservationsystem.dto.RegistrationResponse;
+import org.example.hairdresserreservationsystem.dto.*;
+import org.example.hairdresserreservationsystem.visit.Visit;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class HairdresserMapper {
@@ -36,9 +34,15 @@ public class HairdresserMapper {
     HairdresserLogin login(Hairdresser hairdresser) {
         return new HairdresserLogin(hairdresser.getFirstName(), hairdresser.getPassword(), hairdresser.getRole());
     }
-    HairdresserInformation information(Hairdresser hairdresser, LocalDateTime start,LocalDateTime end){
-        return new HairdresserInformation(hairdresser.getFirstName(), hairdresser.getLastName(), start,end);
 
+    HairdresserInformation information(Hairdresser hairdresser) {
+        List<VisitDto> visitsDto = hairdresser.getVisits().stream().map(this::visitDto).toList();
+        return new HairdresserInformation(hairdresser.getFirstName(), hairdresser.getLastName(), visitsDto);
     }
+
+    private VisitDto visitDto(Visit visit) {
+        return new VisitDto(visit.getStart(), visit.getEnd());
+    }
+
 
 }
