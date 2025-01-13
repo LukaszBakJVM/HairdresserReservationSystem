@@ -13,6 +13,9 @@ public class Visit {
     private Long id;
     private LocalDateTime start;
     private LocalDateTime end;
+    private String typeOfWork;
+    private String clientName;
+    private String clientGender;
     @ManyToMany
     private List<Hairdresser>hairdressers;
 
@@ -46,5 +49,29 @@ public class Visit {
 
     public void setHairdressers(List<Hairdresser> hairdressers) {
         this.hairdressers = hairdressers;
+    }
+
+    public String getTypeOfWork() {
+        return typeOfWork;
+    }
+
+    public void setTypeOfWork(String typeOfWork) {
+        this.typeOfWork = typeOfWork;
+    }
+
+    public String getClientGender() {
+        return clientGender;
+    }
+
+    public void setClientGender(String gender) {
+        this.clientGender = gender;
+    }
+
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
     }
 }

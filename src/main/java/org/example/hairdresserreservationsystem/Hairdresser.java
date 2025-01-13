@@ -15,8 +15,7 @@ public class Hairdresser {
     private String lastName;
     private String password;
     private String role;
-    private String typeOfWork;
-    private String gender;
+
     @ManyToMany(mappedBy = "hairdressers")
     private List<Visit> visits;
 
@@ -34,22 +33,6 @@ public class Hairdresser {
 
     public void setFirstName(String name) {
         this.firstName = name;
-    }
-
-    public String getTypeOfWork() {
-        return typeOfWork;
-    }
-
-    public void setTypeOfWork(String typeOfWork) {
-        this.typeOfWork = typeOfWork;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
     }
 
 
