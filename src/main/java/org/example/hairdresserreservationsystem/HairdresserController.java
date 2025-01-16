@@ -1,5 +1,6 @@
 package org.example.hairdresserreservationsystem;
 
+import org.example.hairdresserreservationsystem.dto.BookingAppointment;
 import org.example.hairdresserreservationsystem.dto.HairdresserInformation;
 import org.example.hairdresserreservationsystem.dto.HairdresserRegistration;
 import org.example.hairdresserreservationsystem.dto.RegistrationResponse;
@@ -29,6 +30,11 @@ public class HairdresserController {
     @ResponseStatus(HttpStatus.OK)
     List<HairdresserInformation> findAll() {
         return services.getHairdresserInformation();
+    }
+    @PostMapping("/apointemet")
+    @ResponseStatus(HttpStatus.CREATED)
+    BookingAppointment createAppointment(@RequestBody BookingAppointment appointment){
+        return services.createAppointment(appointment);
     }
 
 

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.example.hairdresserreservationsystem.Hairdresser;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,15 +18,8 @@ public class Visit {
     private String clientName;
     private String clientGender;
     @ManyToMany
-    private List<Hairdresser>hairdressers;
+    private List<Hairdresser> hairdressers = new ArrayList<>();
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public LocalDateTime getStart() {
         return start;

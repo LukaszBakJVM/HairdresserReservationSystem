@@ -1,6 +1,7 @@
 package org.example.hairdresserreservationsystem;
 
 import org.example.hairdresserreservationsystem.dto.*;
+import org.example.hairdresserreservationsystem.visit.Visit;
 import org.example.hairdresserreservationsystem.visit.VisitRepository;
 import org.springframework.stereotype.Service;
 
@@ -34,9 +35,11 @@ public class HairdresserServices {
 
     }
     BookingAppointment createAppointment(BookingAppointment booking){
-        Hairdresser appointment = mapper.createAppointment(booking);
-        Hairdresser save = repository.save(appointment);
-        return mapper.createAppointmentResponse(save);
+
+        Hairdresser hairdresser = repository.findByFirstNameAndLastName(booking.firstName(), booking.lastName()).orElseThrow();
+        Visit appointment = mapper.createAppointment(hairdresser, booking);
+        Visit save = visitRepository.save(appointment);
+        return mapper.createAppointmentResponse(booking.firstName(), booking.lastName(), save);
 
     }
 

@@ -45,11 +45,12 @@ public class HairdresserMapper {
     private VisitDto visitDto(Visit visit) {
         return new VisitDto(visit.getStart(), visit.getEnd());
     }
-    Hairdresser createAppointment(BookingAppointment booking){
-        Hairdresser hairdresser = new Hairdresser();
+
+    Visit createAppointment(Hairdresser hairdresser, BookingAppointment booking) {
+
         Visit visit = new Visit();
-        hairdresser.setFirstName(booking.firstName());
-        hairdresser.setLastName(booking.lastName());
+        visit.getHairdressers().add(hairdresser);
+
         visit.setTypeOfWork(booking.typeOfWork());
         visit.setClientName(booking.clientName());
         visit.setClientGender(booking.clientGender());
@@ -58,13 +59,12 @@ public class HairdresserMapper {
         LocalDateTime end = start.plusMinutes(booking.duration());
         visit.setEnd(end);
         hairdresser.getVisits().add(visit);
-        return hairdresser;
+        return visit;
     }
-    BookingAppointment createAppointmentResponse(Hairdresser hairdresser){
-        Visit last = hairdresser.getVisits().getLast();
-        long minutes = Duration.between(last.getStart(), last.getEnd()).toMinutes();
-        return new BookingAppointment(hairdresser.getFirstName(), hairdresser.getLastName(), last.getTypeOfWork(),
-                last.getClientName(), last.getClientGender(), last.getStart(),minutes);
+
+    BookingAppointment createAppointmentResponse(String firstname, String lastname, Visit visit) {
+        long duration = Duration.between(visit.getStart(), visit.getEnd()).toMinutes();
+        return new BookingAppointment(firstname, lastname, visit.getTypeOfWork(), visit.getClientName(), visit.getClientGender(), visit.getStart(), duration);
     }
 
 

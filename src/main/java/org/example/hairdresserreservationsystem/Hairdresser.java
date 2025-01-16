@@ -3,6 +3,7 @@ package org.example.hairdresserreservationsystem;
 import jakarta.persistence.*;
 import org.example.hairdresserreservationsystem.visit.Visit;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,15 +18,9 @@ public class Hairdresser {
     private String role;
 
     @ManyToMany(mappedBy = "hairdressers")
-    private List<Visit> visits;
+    private List<Visit> visits = new ArrayList<>();
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getFirstName() {
         return firstName;
