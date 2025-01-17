@@ -1,8 +1,8 @@
 package org.example.hairdresserreservationsystem;
 
-import org.example.hairdresserreservationsystem.dto.BookingAppointment;
 import org.example.hairdresserreservationsystem.dto.HairdresserInformation;
 import org.example.hairdresserreservationsystem.dto.HairdresserRegistration;
+import org.example.hairdresserreservationsystem.dto.MyVisits;
 import org.example.hairdresserreservationsystem.dto.RegistrationResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -31,10 +31,11 @@ public class HairdresserController {
     List<HairdresserInformation> findAll() {
         return services.getHairdresserInformation();
     }
-    @PostMapping("/apointemet")
-    @ResponseStatus(HttpStatus.CREATED)
-    BookingAppointment createAppointment(@RequestBody BookingAppointment appointment){
-        return services.createAppointment(appointment);
+
+    @GetMapping("/myAppoinment")
+    @ResponseStatus(HttpStatus.OK)
+    List<MyVisits> myVisits() {
+        return services.findMyVisit();
     }
 
 

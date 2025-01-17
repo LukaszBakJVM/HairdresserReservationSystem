@@ -34,7 +34,7 @@ public class HairdresserMapper {
     }
 
     HairdresserLogin login(Hairdresser hairdresser) {
-        return new HairdresserLogin(hairdresser.getFirstName(), hairdresser.getPassword(), hairdresser.getRole());
+        return new HairdresserLogin(hairdresser.getUsername(), hairdresser.getPassword(), hairdresser.getRole());
     }
 
     HairdresserInformation information(Hairdresser hairdresser) {
@@ -65,6 +65,9 @@ public class HairdresserMapper {
     BookingAppointment createAppointmentResponse(String firstname, String lastname, Visit visit) {
         long duration = Duration.between(visit.getStart(), visit.getEnd()).toMinutes();
         return new BookingAppointment(firstname, lastname, visit.getTypeOfWork(), visit.getClientName(), visit.getClientGender(), visit.getStart(), duration);
+    }
+    MyVisits myVisits ( Visit visit){
+        return new MyVisits(visit.getStart(),visit.getEnd(), visit.getTypeOfWork(), visit.getClientName(), visit.getClientGender());
     }
 
 

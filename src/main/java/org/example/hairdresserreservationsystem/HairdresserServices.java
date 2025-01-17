@@ -3,10 +3,12 @@ package org.example.hairdresserreservationsystem;
 import org.example.hairdresserreservationsystem.dto.*;
 import org.example.hairdresserreservationsystem.visit.Visit;
 import org.example.hairdresserreservationsystem.visit.VisitRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 @Service
 public class HairdresserServices {
@@ -31,16 +33,23 @@ public class HairdresserServices {
     }
 
     public List<HairdresserInformation> getHairdresserInformation() {
-        return repository.findAll().stream().map(mapper::information).toList();
+
+        return StreamSupport.stream(repository.findAll().spliterator(), false).map(mapper::information).toList();
 
     }
-    BookingAppointment createAppointment(BookingAppointment booking){
+
+    BookingAppointment createAppointment(BookingAppointment booking) {
 
         Hairdresser hairdresser = repository.findByFirstNameAndLastName(booking.firstName(), booking.lastName()).orElseThrow();
         Visit appointment = mapper.createAppointment(hairdresser, booking);
         Visit save = visitRepository.save(appointment);
         return mapper.createAppointmentResponse(booking.firstName(), booking.lastName(), save);
 
+    }
+
+    List<MyVisits> findMyVisit() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return visitRepository.findVisitByHairdressersUsername(username).stream().map(mapper::myVisits).toList();
     }
 
 }
