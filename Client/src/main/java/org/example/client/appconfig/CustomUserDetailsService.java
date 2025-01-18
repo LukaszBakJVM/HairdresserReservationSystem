@@ -1,7 +1,7 @@
-package org.example.hairdresserreservationsystem.appconfig;
+package org.example.client.appconfig;
 
-import org.example.hairdresserreservationsystem.HairdresserServices;
-import org.example.hairdresserreservationsystem.dto.HairdresserLogin;
+import org.example.client.ClientServices;
+import org.example.client.dto.ClientLogin;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,11 +10,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
-    private final HairdresserServices services;
+    private final ClientServices services;
 
-    public CustomUserDetailsService(HairdresserServices services) {
+    public CustomUserDetailsService(ClientServices services) {
         this.services = services;
     }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -23,7 +24,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     }
 
-    private UserDetails createUserDetails(HairdresserLogin login) {
+    private UserDetails createUserDetails(ClientLogin login) {
         return User.builder()
                 .username(login.username())
                 .password(login.password())

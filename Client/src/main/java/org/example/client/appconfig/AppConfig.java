@@ -1,4 +1,4 @@
-package org.example.hairdresserreservationsystem.appconfig;
+package org.example.client.appconfig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,21 +19,21 @@ public class AppConfig {
     MvcRequestMatcher.Builder mvc(HandlerMappingIntrospector introspector) {
         return new MvcRequestMatcher.Builder(introspector);
     }
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, MvcRequestMatcher.Builder mvc) throws Exception {
 
         http.formLogin(AbstractAuthenticationFilterConfigurer::permitAll);
-        http.authorizeHttpRequests(request -> request.requestMatchers(mvc.pattern(HttpMethod.GET, "/hairdresser/myAppoinment")).hasRole("hairdresser").anyRequest().permitAll()).httpBasic(Customizer.withDefaults());
+        http.authorizeHttpRequests(request ->request.requestMatchers(mvc.pattern(HttpMethod.GET, "/client/myAppoinment")).hasRole("client").anyRequest().permitAll()).httpBasic(Customizer.withDefaults());
 
         http.csrf(AbstractHttpConfigurer::disable);
         return http.build();
     }
 
+
     @Bean
     PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
-
-
 }
+
+
