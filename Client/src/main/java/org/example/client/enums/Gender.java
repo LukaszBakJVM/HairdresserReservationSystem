@@ -1,7 +1,7 @@
 package org.example.client.enums;
 
 public enum Gender {
-    MALE("Male"),FEMALE("Female");
+    MALE("Male"),FEMALE("Female"),CHILD("Child");
     private final String gender;
 
     Gender(String gender) {

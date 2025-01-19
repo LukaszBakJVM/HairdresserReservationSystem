@@ -1,9 +1,9 @@
 package org.example.client;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import org.example.client.visittime.VisitTime;
+
+import java.util.List;
 
 @Entity
 public class ClientEntity {
@@ -16,6 +16,8 @@ public class ClientEntity {
     private String password;
     private String role;
     private String telephoneNumber;
+    @OneToMany(mappedBy = "client")
+    private List<VisitTime>visits;
 
     public long getId() {
         return id;
@@ -71,5 +73,13 @@ public class ClientEntity {
 
     public void setTelephoneNumber(String telephoneNumber) {
         this.telephoneNumber = telephoneNumber;
+    }
+
+    public List<VisitTime> getVisits() {
+        return visits;
+    }
+
+    public void setVisits(List<VisitTime> visits) {
+        this.visits = visits;
     }
 }
