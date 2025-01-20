@@ -15,11 +15,13 @@ public class HairdresserServices {
     private final HairdresserRepository repository;
     private final HairdresserMapper mapper;
     private final VisitRepository visitRepository;
+    private final KafkaServices kafkaServices;
 
-    public HairdresserServices(HairdresserRepository repository, HairdresserMapper mapper, VisitRepository visitRepository) {
+    public HairdresserServices(HairdresserRepository repository, HairdresserMapper mapper, VisitRepository visitRepository, KafkaServices kafkaServices) {
         this.repository = repository;
         this.mapper = mapper;
         this.visitRepository = visitRepository;
+        this.kafkaServices = kafkaServices;
     }
 
     RegistrationResponse createNewPerson(HairdresserRegistration registrationDto) {
@@ -50,6 +52,10 @@ public class HairdresserServices {
     List<MyVisits> findMyVisit() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         return visitRepository.findVisitByHairdressersUsername(username).stream().map(mapper::myVisits).toList();
+    }
+    TypeOfVisitDto createTypeOfVisit(TypeOfVisitDto dto){
+        kafkaServices.sendMessage("typOfVisit","create",dto);
+        return dto;
     }
 
 }

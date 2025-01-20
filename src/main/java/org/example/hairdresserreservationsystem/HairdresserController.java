@@ -1,9 +1,6 @@
 package org.example.hairdresserreservationsystem;
 
-import org.example.hairdresserreservationsystem.dto.HairdresserInformation;
-import org.example.hairdresserreservationsystem.dto.HairdresserRegistration;
-import org.example.hairdresserreservationsystem.dto.MyVisits;
-import org.example.hairdresserreservationsystem.dto.RegistrationResponse;
+import org.example.hairdresserreservationsystem.dto.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +33,12 @@ public class HairdresserController {
     @ResponseStatus(HttpStatus.OK)
     List<MyVisits> myVisits() {
         return services.findMyVisit();
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    TypeOfVisitDto addTypeOfVisit(@RequestBody TypeOfVisitDto dto){
+        return services.createTypeOfVisit(dto);
     }
 
 
