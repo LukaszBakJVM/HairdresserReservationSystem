@@ -27,4 +27,5 @@ public class ClientMapper {
     ClientLogin login(ClientEntity client) {
         return new ClientLogin(client.getUsername(), client.getPassword(), client.getRole());
     }
+
 }
