@@ -35,7 +35,7 @@ public class HairdresserController {
         return services.findMyVisit();
     }
 
-    @PostMapping
+    @PostMapping("/typeOfVisit")
     @ResponseStatus(HttpStatus.CREATED)
     TypeOfVisitDto addTypeOfVisit(@RequestBody TypeOfVisitDto dto){
         return services.createTypeOfVisit(dto);

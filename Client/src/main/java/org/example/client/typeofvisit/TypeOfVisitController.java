@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("typeOfVisits")
+@RequestMapping("/typeOfVisits")
 public class TypeOfVisitController {
     private final TypeOfVisitServices services;
 
@@ -23,4 +23,6 @@ public class TypeOfVisitController {
     List<TypeOfVisitDto> allTypeOfVisits() {
         return services.getAllTypeOfVisit();
     }
+
+
 }

@@ -20,14 +20,15 @@ public class TypeOfVisitServices {
 
 
     }
-   public void addNewTypOfVisit(TypeOfVisitFromKafka type){
+
+    public void addNewTypOfVisit(TypeOfVisitFromKafka type) {
         TypeOfVisit kafka = kafka(type);
         repository.save(kafka);
 
     }
 
 
-    TypeOfVisit kafka(TypeOfVisitFromKafka visit){
+    TypeOfVisit kafka(TypeOfVisitFromKafka visit) {
         TypeOfVisit type = new TypeOfVisit();
         type.setGender(visit.gender());
         type.setTypeOfWork(visit.typeOfWork());
@@ -36,17 +37,9 @@ public class TypeOfVisitServices {
         return type;
     }
 
-    private TypeOfVisit dtoToEntity(TypeOfVisitDto dto) {
-        TypeOfVisit type = new TypeOfVisit();
-        type.setGender(dto.gender());
-        type.setTypeOfWork(dto.typeOfWork());
-        type.setDuration(dto.duration());
-        type.setPrice(dto.price());
-        return type;
-    }
 
     private TypeOfVisitDto entityToDto(TypeOfVisit type) {
-        return new TypeOfVisitDto(type.getGender(), type.getTypeOfWork(), type.getDuration(), type.getPrice());
+        return new TypeOfVisitDto(type.getId(), type.getGender(), type.getTypeOfWork(), type.getDuration(), type.getPrice());
     }
 
 
